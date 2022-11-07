@@ -31,7 +31,9 @@ def isParetoImprovement(agents: List[Agent], option1: int, option2: int) -> bool
 
 def isParetoOptimal(agents: List[Agent], option: int, allOptions: List[int]) -> bool:
     for option_another_agent in allOptions:
-        if option != option_another_agent and isParetoImprovement(agents, option_another_agent, option):
+        if option == option_another_agent:
+            continue
+        if isParetoImprovement(agents, option_another_agent, option):
             return False
 
     return True

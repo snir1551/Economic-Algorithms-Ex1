@@ -6,24 +6,26 @@ class Agent:
     def __init__(self):
         self.options: Dict[int, float] = dict()
 
-    def set_option(self, option: int, value: float):
+    def set_option(self, option: int, value: float):  # add option
         self.options.update({option: value})
 
-    def value(self, option: int) -> float:
-        if self.options.get(option) is None:
+    def value(self, option: int) -> float:  # return value of option
+        if self.options.get(option) is None:  # option doesn't exist
             return -1
         return self.options[option]
 
 
 def isParetoImprovement(agents: List[Agent], option1: int, option2: int) -> bool:
-    numAgents = 0
-    for x in agents:
-        if x.value(option1) < x.value(option2):
+    count_equal_value = 0  # counter of equal values in option 1 to option 2
+    if option1 == option2:
+        return False
+    for x_agent in agents:
+        if x_agent.value(option1) < x_agent.value(option2):
             return False
-        elif x.value(option1) == x.value(option2):
-            numAgents += 1
+        elif x_agent.value(option1) == x_agent.value(option2):
+            count_equal_value += 1
 
-    if numAgents == len(agents):
+    if count_equal_value == len(agents):
         return False
     else:
         return True
@@ -37,4 +39,3 @@ def isParetoOptimal(agents: List[Agent], option: int, allOptions: List[int]) -> 
             return False
 
     return True
-
